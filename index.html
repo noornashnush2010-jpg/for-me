@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>أمن روابط</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    p {
+      opacity: 0.8;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      margin-top: 40px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #22c55e;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .safe {
+      color: #22c55e;
+    }
+
+    .warning {
+      color: #facc15;
+    }
+
+    .danger {
+      color: #ef4444;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>🔐 أمن روابط</h1>
+  <p>افحص الرابط وتأكد هل هو آمن أو لا</p>
+
+  <div class="box">
+
+    <input id="url" placeholder="https://example.com">
+
+    <br>
+
+    <button onclick="checkLink()">فحص الرابط</button>
+
+    <div id="result"></div>
+
+  </div>
+
+<script>
+
+function checkLink() {
+
+  let url = document.getElementById("url").value;
+  let result = document.getElementById("result");
+
+  if (!url) {
+    result.innerHTML = "❌ اكتب رابط أول";
+    result.className = "danger";
+    return;
+  }
+
+  if (!url.startsWith("http")) {
+    result.innerHTML = "❌ رابط غير صحيح";
+    result.className = "danger";
+    return;
+  }
+
+  result.innerHTML = "⏳ جاري الفحص...";
+  result.className = "";
+
+  setTimeout(() => {
+
+    if (
+      url.includes("login") ||
+      url.includes("verify") ||
+      url.includes("free") ||
+      url.includes("gift") ||
+      url.includes("bonus")
+    ) {
+      result.innerHTML = "⚠️ الرابط مشكوك فيه";
+      result.className = "warning";
+
+    } else if (
+      url.includes("hack") ||
+      url.includes("crack") ||
+      url.includes("phishing")
+    ) {
+      result.innerHTML = "❌ الرابط خطر جدًا!";
+      result.className = "danger";
+
+    } else {
+      result.innerHTML = "✅ الرابط يبدو آمن";
+      result.className = "safe";
+    }
+
+  }, 1500);
+}
+
+</script>
+
+</body>
+</html>
